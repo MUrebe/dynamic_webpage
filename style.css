@@ -1,98 +1,119 @@
-
 /* Base Reset and Layout */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .container {
-    background: #fff;
-    padding: 3em 2em;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+  background: #fff;
+  padding: 2em;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  transition: transform 0.4s ease;
 }
 h1 {
-    margin-bottom: 1.5em;
-    color: #444;
+  margin-bottom: 1.5em;
+  color: #444;
 }
 input, button, select {
-    width: 100%;
-    margin: 0.8em 0;
-    padding: 0.75em;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 1em;
+  width: 100%;
+  margin: 0.75em 0;
+  padding: 0.75em;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
 }
 input:focus, select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
 }
 button {
-    background: #007bff;
-    color: white;
-    border: none;
-    font-weight: bold;
-    transition: background 0.3s;
+  background: #007bff;
+  color: white;
+  border: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+button i {
+  font-size: 1.2em;
 }
 button:hover {
-    background: #0056b3;
+  background: #0056b3;
+  transform: scale(1.03);
 }
 select {
-    background: white;
-}
-.menu-item {
-    margin-top: 1em;
-    padding: 1em;
-    background: #f9f9f9;
-    border-left: 5px solid #007bff;
-    display: none;
-    text-align: left;
-}
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
+  background: white;
 }
 
-/* Themes */
+/* Menu Items */
+.menu-item {
+  margin-top: 1em;
+  padding: 1em;
+  background: #f9f9f9;
+  border-left: 5px solid #007bff;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+.menu-item.active {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  cursor: pointer;
+  padding: 0.5em 1em;
+  background: #28a745;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.toggle-btn:hover {
+  background: #218838;
+}
+
+/* Dark Theme */
 .theme-dark {
-    background-color: #121212;
-    color: #e0e0e0;
+  background-color: #121212;
+  color: #e0e0e0;
 }
 .theme-dark .container {
-    background: #1e1e1e;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+  background: #1e1e1e;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
 }
 .theme-dark input, .theme-dark select {
-    background: #333;
-    color: #fff;
-    border: 1px solid #555;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
 }
 .theme-dark button {
-    background: #03dac5;
-    color: #000;
+  background: #03dac5;
+  color: #000;
 }
 .theme-dark .menu-item {
-    background: #2c2c2c;
-    border-color: #03dac5;
+  background: #2c2c2c;
+  border-color: #03dac5;
 }
 
-.theme-light {
-    background-color: #fafafa;
-    color: #333;
-}
+/* Icon Style (Font Awesome or Similar) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
