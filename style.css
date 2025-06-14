@@ -1,45 +1,98 @@
 
-body {
-    font-family: Arial, sans-serif;
+/* Base Reset and Layout */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f0f0f0;
 }
 .container {
-    background: white;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 300px;
+    background: #fff;
+    padding: 3em 2em;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+h1 {
+    margin-bottom: 1.5em;
+    color: #444;
 }
 input, button, select {
     width: 100%;
-    margin: 0.5em 0;
-    padding: 0.5em;
-    border-radius: 5px;
+    margin: 0.8em 0;
+    padding: 0.75em;
+    border-radius: 10px;
     border: 1px solid #ccc;
+    font-size: 1em;
+}
+input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
 }
 button {
     background: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
 }
-.theme-dark {
-    background-color: #333;
-    color: white;
+button:hover {
+    background: #0056b3;
 }
-.theme-light {
-    background-color: #fff;
-    color: #333;
+select {
+    background: white;
 }
 .menu-item {
     margin-top: 1em;
-    padding: 0.5em;
-    background: #eee;
+    padding: 1em;
+    background: #f9f9f9;
+    border-left: 5px solid #007bff;
     display: none;
+    text-align: left;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Themes */
+.theme-dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+.theme-dark .container {
+    background: #1e1e1e;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+.theme-dark input, .theme-dark select {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+.theme-dark button {
+    background: #03dac5;
+    color: #000;
+}
+.theme-dark .menu-item {
+    background: #2c2c2c;
+    border-color: #03dac5;
+}
+
+.theme-light {
+    background-color: #fafafa;
+    color: #333;
 }
