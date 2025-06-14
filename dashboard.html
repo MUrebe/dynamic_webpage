@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body class="theme-default">
+    <div class="container">
+        <h1>Welcome</h1>
+        <nav>
+            <button onclick="toggleMenu('profile')">Toggle Profile</button>
+            <button onclick="toggleMenu('settings')">Toggle Settings</button>
+            <select onchange="changeTheme(this.value)">
+                <option value="default">Default</option>
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+            </select>
+        </nav>
+        <div id="menu">
+            <div id="profile" class="menu-item">Profile Info</div>
+            <div id="settings" class="menu-item">Settings</div>
+        </div>
+        <input type="text" id="userId" placeholder="Enter ID">
+        <button onclick="fetchUserData()">Get Info</button>
+        <pre id="userData"></pre>
+    </div>
+</body>
+</html>
