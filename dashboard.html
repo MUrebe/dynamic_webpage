@@ -1,31 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>User Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body class="theme-default">
-    <div class="container">
-        <h1>Welcome</h1>
-        <nav>
-            <button onclick="toggleMenu('profile')">Toggle Profile</button>
-            <button onclick="toggleMenu('settings')">Toggle Settings</button>
-            <select onchange="changeTheme(this.value)">
-                <option value="default">Default</option>
-                <option value="dark">Dark</option>
-                <option value="light">Light</option>
-            </select>
-        </nav>
-        <div id="menu">
-            <div id="profile" class="menu-item">Profile Info</div>
-            <div id="settings" class="menu-item">Settings</div>
-        </div>
-        <input type="text" id="userId" placeholder="Enter ID">
-        <button onclick="fetchUserData()">Get Info</button>
-        <pre id="userData"></pre>
+  <div class="container">
+    <h1>Welcome, <span id="welcomeName">User</span></h1>
+
+    <div class="menu">
+      <button onclick="toggleMenu('infoPanel')">Toggle User Info</button>
+      <button onclick="changeTheme('default')">Default Theme</button>
+      <button onclick="changeTheme('dark')">Dark Theme</button>
+      <button onclick="changeTheme('blue')">Blue Theme</button>
+      <button onclick="logout()">Logout</button>
     </div>
+
+    <div id="infoPanel" style="display: block; margin-top: 20px;">
+      <h2>Your Info</h2>
+      <pre id="userInfo">Loading...</pre>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+      const lastUser = Object.keys(users).find(u => sessionStorage.getItem('loggedInUser') === u);
+
+      if (!lastUser) {
+        alert("Please log in first.");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const user = users[lastUser];
+      document.getElementById('welcomeName').textContent = user.firstName;
+      document.getElementById('userInfo').textContent = JSON.stringify(user, null, 2);
+    });
+
+    function logout() {
+      sessionStorage.removeItem('loggedInUser');
+      alert("Logged out.");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>
