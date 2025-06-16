@@ -1,45 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
+// Giriş
+if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
 
-    // Giriş
-    if (loginForm) {
-        loginForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            localStorage.setItem('loggedInUser', username || 'User');
-            alert('Login simulated!');
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+
+        if (user) {
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            alert('Login successful!');
             window.location.href = 'dashboard.html';
-        });
-    }
+        } else {
+            alert('Invalid username or password.');
+        }
+    });
+}
 
-    // Kayıt
-    if (registerForm) {
-        registerForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            if (!email.includes('@')) {
-                alert('Invalid email');
-                return;
-            }
-            localStorage.setItem('registeredEmail', email);
-            alert('Registration simulated!');
-            window.location.href = 'index.html';
-        });
-    }
+// Kayıt
+if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!username || !email || !firstName || !lastName || !password) {
+            alert('Please fill all fields.');
+            return;
+        }
+        if (!email.includes('@')) {
+            alert('Invalid email.');
+            return;
+        }
+
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+
+        // Benzersiz username ve email kontrolü
+        if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+            alert('Username already taken.');
+            return;
+        }
+        if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+            alert('Email already registered.');
+            return;
+        }
+
+        // Yeni kullanıcı ekle
+        users.push({ username, email, firstName, lastName, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Registration successful! You can now login.');
+        window.location.href = 'index.html';
+    });
+}
+
 
     // Dashboard ayarları
     const welcomeName = document.getElementById('welcomeName');
     const userInfo = document.getElementById('userInfo');
-    if (welcomeName) {
-        const name = localStorage.getItem('loggedInUser') || 'User';
-        welcomeName.textContent = name;
-
-        // Saklanan kullanıcı bilgileri
-        const savedEmail = localStorage.getItem('userEmail') || 'Not set';
-        const savedName = localStorage.getItem('userFirstName') || name;
-        userInfo.textContent = `Name: ${savedName}\nEmail: ${savedEmail}`;
+   if (welcomeName) {
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (user) {
+        welcomeName.textContent = user.firstName || user.username || 'User';
+        userInfo.textContent = `Name: ${user.firstName} ${user.lastName}\nEmail: ${user.email}`;
+    } else {
+        welcomeName.textContent = 'User';
+        userInfo.textContent = 'Name: Not set\nEmail: Not set';
     }
+}
 
     // Tema ayarlarını uygula
     const savedTheme = localStorage.getItem('selectedTheme');
@@ -124,6 +158,6 @@ function saveUserSettings() {
 
 // Çıkış
 function logout() {
-    localStorage.clear();
+    localStorage.removeItem('loggedInUser');
     window.location.href = 'index.html';
 }
