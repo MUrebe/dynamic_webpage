@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const users = JSON.parse(localStorage.getItem('users') || '{}');
 
             if (users[username] && users[username].password === password) {
+                sessionStorage.setItem("loggedInUser", username);
                 alert(`Welcome, ${users[username].firstName}!`);
                 window.location.href = 'dashboard.html';
             } else {
