@@ -10,41 +10,54 @@
   <div class="container">
     <h1>Welcome, <span id="welcomeName">User</span></h1>
 
+    <!-- Menü -->
     <div class="menu">
-      <button onclick="toggleMenu('infoPanel')">Toggle User Info</button>
-      <button onclick="changeTheme('default')">Default Theme</button>
-      <button onclick="changeTheme('dark')">Dark Theme</button>
-      <button onclick="changeTheme('blue')">Blue Theme</button>
+      <label><input type="checkbox" checked onchange="toggleSection('infoPanel')"> Show User Info</label>
+      <label><input type="checkbox" checked onchange="toggleSection('searchPanel')"> Show JSON Search</label>
+      <label><input type="checkbox" checked onchange="toggleSection('xmlSearchPanel')"> Show XML Search</label>
+      <label><input type="checkbox" checked onchange="toggleSection('themePanel')"> Show Theme Options</label>
+      <label><input type="checkbox" checked onchange="toggleSection('settingsPanel')"> Show Settings</label>
       <button onclick="logout()">Logout</button>
     </div>
 
-    <div id="infoPanel" style="display: block; margin-top: 20px;">
+    <!-- Kullanıcı Bilgisi -->
+    <div id="infoPanel">
       <h2>Your Info</h2>
       <pre id="userInfo">Loading...</pre>
     </div>
+
+    <!-- JSON ile Kullanıcı Arama -->
+    <div id="searchPanel">
+      <h2>Search by ID (JSON)</h2>
+      <input type="text" id="userId" placeholder="Enter ID" />
+      <button onclick="fetchUserData()">Fetch from JSON</button>
+      <pre id="userData">No data yet.</pre>
+    </div>
+
+    <!-- XML ile Kullanıcı Arama -->
+    <div id="xmlSearchPanel">
+      <h2>Search by ID (XML)</h2>
+      <input type="text" id="userIdXml" placeholder="Enter ID" />
+      <button onclick="fetchUserFromXML()">Fetch from XML</button>
+      <pre id="xmlUserData">No data yet.</pre>
+    </div>
+
+    <!-- Tema Seçimi -->
+    <div id="themePanel">
+      <h2>Select Theme</h2>
+      <button onclick="changeTheme('default')">Default</button>
+      <button onclick="changeTheme('dark')">Dark</button>
+      <button onclick="changeTheme('blue')">Blue</button>
+    </div>
+
+    <!-- Ayarlar Paneli -->
+    <div id="settingsPanel">
+      <h2>User Settings</h2>
+      <label>First Name: <input type="text" id="settingFirstName" /></label><br />
+      <label>Email: <input type="email" id="settingEmail" /></label><br />
+      <button onclick="saveUserSettings()">Save Settings</button>
+      <p id="settingsSaved" style="color: green;"></p>
+    </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      const lastUser = Object.keys(users).find(u => sessionStorage.getItem('loggedInUser') === u);
-
-      if (!lastUser) {
-        alert("Please log in first.");
-        window.location.href = "index.html";
-        return;
-      }
-
-      const user = users[lastUser];
-      document.getElementById('welcomeName').textContent = user.firstName;
-      document.getElementById('userInfo').textContent = JSON.stringify(user, null, 2);
-    });
-
-    function logout() {
-      sessionStorage.removeItem('loggedInUser');
-      alert("Logged out.");
-      window.location.href = "index.html";
-    }
-  </script>
 </body>
 </html>
