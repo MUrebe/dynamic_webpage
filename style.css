@@ -117,3 +117,35 @@ select {
 
 /* Icon Style (Font Awesome or Similar) */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+/* Blue Theme */
+.theme-blue {
+  background: linear-gradient(135deg, #d0e7ff, #a0c4ff);
+  color: #003366;
+}
+
+.theme-blue .container {
+  background: #cfe0ff;
+  box-shadow: 0 10px 30px rgba(0, 70, 200, 0.2);
+}
+
+.theme-blue input, 
+.theme-blue select {
+  background: #e4f0ff;
+  color: #003366;
+  border: 1px solid #6699ff;
+}
+
+.theme-blue button {
+  background: #0056b3;
+  color: white;
+}
+
+.theme-blue button:hover {
+  background: #003d80;
+}
+
+.theme-blue .menu-item {
+  background: #d9e7ff;
+  border-color: #004080;
+}
