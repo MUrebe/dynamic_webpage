@@ -161,17 +161,3 @@ function logout() {
     localStorage.removeItem('loggedInUser');
     window.location.href = 'index.html';
 }
-
-// Menü login durumunu kontrol et
-document.addEventListener('DOMContentLoaded', () => {
-  const loggedInUser = localStorage.getItem('loggedInUser');
-  const loginNav = document.getElementById('loginNav');
-  const dashboardNav = document.getElementById('dashboardNav');
-  const logoutNav = document.getElementById('logoutNav');
-
-  if (loggedInUser) {
-    if (dashboardNav) dashboardNav.style.display = 'inline-block';
-    if (logoutNav) logoutNav.style.display = 'inline-block';
-    if (loginNav) loginNav.style.display = 'none';
-  }
-});
