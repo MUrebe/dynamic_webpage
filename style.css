@@ -149,3 +149,38 @@ select {
   background: #d9e7ff;
   border-color: #004080;
 }
+
+/* Navbar */
+header {
+  background: #007bff;
+  padding: 1em 0;
+  margin-bottom: 2em;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  list-style: none;
+}
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.navbar li a:hover {
+  color: #ffeb3b;
+}
+
+.content {
+  max-width: 900px;
+  margin: auto;
+  padding: 1em;
+  text-align: left;
+}
+footer {
+  margin-top: 2em;
+  text-align: center;
+  color: #666;
+  font-size: 0.9em;
+}
